@@ -1,0 +1,15 @@
+# Note these are settings for GNU readline. Comparable settings for
+# zsh are available in .zshrc.
+
+set bell-style visible
+set completion-ignore-case on
+"\e[1;5C": forward-word
+"\e[1;9C": forward-word
+"\e[1;5D": backward-word
+"\e[1;9D": backward-word
+
+# To setup on macOS, change the default keyboard shortcuts for Mission
+# Control s.t. they do not conflict with ctrl-left-arrow, etc. In
+# iTerm under Preferences -> Profiles -> Keys, set left and right
+# Option keys to "Esc+" and load the key mappings preset "Natural Text
+# Editing".
