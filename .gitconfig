@@ -1,0 +1,14 @@
+[alias]
+  prune-orphaned-branches = !git remote prune origin && git branch -vv | egrep '\\[origin/\\S+: gone]' | awk '{print $1}' | xargs -r git branch -D
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+[pull]
+  rebase = false
+[status]
+  showUntrackedFiles = no
+[user]
+  name = Daniel Walker
+  email = dwalker@bu.edu
