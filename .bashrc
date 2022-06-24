@@ -29,11 +29,11 @@ fi
 umask 077
 ulimit -c 0
 
-if [ -d /Applications/MacPorts/Emacs.app/ ]; then
-  alias emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
-  alias emacsclient='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
-  alias etags='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/etags'
-  alias ebrowse='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ebrowse'
+if [ -d /Applications/Emacs.app/ ]; then
+  alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+  alias emacsclient='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
+  alias etags='/Applications/Emacs.app/Contents/MacOS/bin/etags'
+  alias ebrowse='/Applications/Emacs.app/Contents/MacOS/bin/ebrowse'
 fi
 
 alias pip='python -m pip'

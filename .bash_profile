@@ -12,8 +12,8 @@ if ps $$ | fgrep -q bash; then
   fi
 fi
 
-if [ -f /Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs ]; then
-  export EDITOR='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -nw';
+if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
+  export EDITOR='/Applications/Emacs.app/Contents/MacOS/Emacs -nw';
 fi
 export MANPATH=/opt/local/share/man:"$MANPATH":~/.local/share/man
 export PAGER=/usr/bin/less
