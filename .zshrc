@@ -3,6 +3,7 @@ if [ -f ~/.bashrc ]; then
 fi
 
 unsetopt BEEP
+setopt +o nomatch
 
 bindkey -e
 bindkey '\e[1;5C' forward-word
