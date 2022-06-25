@@ -65,6 +65,18 @@
 (global-set-key (kbd "C-c <up>")    'windmove-up)
 (global-set-key (kbd "C-x <down>")  'windmove-down)
 (global-set-key (kbd "C-c <down>")  'windmove-down)
+(global-set-key (kbd "ESC <up>") 'backward-paragraph)
+(global-set-key (kbd "ESC <down>") 'forward-paragraph)
+(global-set-key (kbd "ESC <left>") 'backward-word)
+(global-set-key (kbd "ESC <right>") 'forward-word)
+(global-set-key (kbd "C-<up>") 'scroll-down-command)
+(global-set-key (kbd "C-<down>") 'scroll-up-command)
+(global-set-key (kbd "C-<left>") 'move-beginning-of-line)
+(global-set-key (kbd "C-<right>") 'move-end-of-line)
+(define-key elpy-mode-map (kbd "ESC <up>") 'elpy-nav-move-line-or-region-up)
+(define-key elpy-mode-map (kbd "ESC <down>") 'elpy-nav-move-line-or-region-down)
+(define-key elpy-mode-map (kbd "ESC <left>") 'elpy-nav-indent-shift-left)
+(define-key elpy-mode-map (kbd "ESC <right>") 'elpy-nav-indent-shift-right)
 
 ;; Play nicely with window managers, X11, etc.
 (when window-system
@@ -86,6 +98,7 @@
 (when (string-equal system-type "darwin")
   (setq exec-path (append '("/opt/local/bin") exec-path))
   (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
