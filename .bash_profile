@@ -26,6 +26,10 @@ export PYTHONIOENCODING=UTF-8
 
 # Java environment
 if [ -x /usr/libexec/java_home ]; then
-  export JAVA_HOME=$(/usr/libexec/java_home)
-  export KEYTOOL="$JAVA_HOME"/jre/bin
+  export JAVA_HOME=$(/usr/libexec/java_home 2> /dev/null)
+  if [[ "$JAVA_HOME" ]]; then
+    export KEYTOOL="$JAVA_HOME"/jre/bin
+  else
+    unset JAVA_HOME
+  fi
 fi
