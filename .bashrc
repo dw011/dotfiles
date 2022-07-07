@@ -6,6 +6,13 @@ if ps $$ | fgrep -q bash; then
     . /etc/bashrc
   fi
 
+  # Bash completion; e.g. for Makefile targets
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /opt/local/share/bash-completion/bash_completion ]; then
+    . /opt/local/share/bash-completion/bash_completion
+  fi
+
   # Bash options
   if [[ "$BASH_VERSION" == 4.* ]]; then
     shopt -s dirspell

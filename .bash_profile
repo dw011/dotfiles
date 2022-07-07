@@ -5,11 +5,6 @@ if ps $$ | fgrep -q bash; then
   if [ -f ~/.bashrc ]; then
     . ~/.bashrc
   fi
-
-  # Bash completion; e.g. for Makefile targets
-  if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-    . /opt/local/etc/profile.d/bash_completion.sh
-  fi
 fi
 
 if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
