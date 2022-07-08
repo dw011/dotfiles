@@ -52,6 +52,7 @@
 (elpy-enable)
 (setq elpy-rpc-python-command "python3")
 (setq elpy-rpc-timeout 10)
+(setq elpy-rpc-ignored-buffer-size 204800)
 (add-hook 'elpy-mode-hook
           (lambda () (add-hook 'before-save-hook 'elpy-format-code nil t)))
 (projectile-mode 1)
