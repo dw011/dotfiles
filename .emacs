@@ -21,6 +21,7 @@
 (setq visible-bell t)
 (menu-bar-mode -1)
 (auto-fill-mode 1)
+(fido-vertical-mode 1)
 (global-font-lock-mode 1)
 (transient-mark-mode 1)
 (show-paren-mode 1)
