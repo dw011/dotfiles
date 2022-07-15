@@ -9,6 +9,8 @@ fi
 
 if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
   export EDITOR='/Applications/Emacs.app/Contents/MacOS/Emacs -nw';
+else
+  export EDITOR='emacs -nw';
 fi
 export MANPATH=/opt/local/share/man:"$MANPATH":~/.local/share/man
 export PAGER=/usr/bin/less
