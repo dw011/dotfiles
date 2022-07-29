@@ -34,6 +34,9 @@
 
 ;; Global hooks
 (add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'icomplete-minibuffer-setup-hook
+          (lambda ()
+            (setq-local completion-styles '(basic substring))))
 
 ;; Packages and MELPA
 (require 'package)
@@ -42,7 +45,7 @@
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
-(dolist (package `(elpy projectile))
+(dolist (package `(csv-mode elpy projectile))
   (unless (package-installed-p package)
     (package-install package)))
 
@@ -51,11 +54,10 @@
 ;; setup required python packages.
 ;; See https://elpy.readthedocs.io/en/latest/introduction.html
 (elpy-enable)
+(setq elpy-project-ignored-directories (cons ".*" nil))
 (setq elpy-rpc-python-command "python3")
 (setq elpy-rpc-timeout 10)
-(setq elpy-rpc-ignored-buffer-size 204800)
-(add-hook 'elpy-mode-hook
-          (lambda () (add-hook 'before-save-hook 'elpy-format-code nil t)))
+(setq elpy-rpc-ignored-buffer-size 512000)
 (projectile-mode 1)
 
 ;; Key bindings
@@ -75,10 +77,25 @@
 (global-set-key (kbd "C-<down>") 'scroll-up-command)
 (global-set-key (kbd "C-<left>") 'move-beginning-of-line)
 (global-set-key (kbd "C-<right>") 'move-end-of-line)
-(define-key elpy-mode-map (kbd "ESC <up>") 'elpy-nav-move-line-or-region-up)
-(define-key elpy-mode-map (kbd "ESC <down>") 'elpy-nav-move-line-or-region-down)
-(define-key elpy-mode-map (kbd "ESC <left>") 'elpy-nav-indent-shift-left)
-(define-key elpy-mode-map (kbd "ESC <right>") 'elpy-nav-indent-shift-right)
+(global-set-key (kbd "C-c C-f") 'elpy-find-file)
+(global-set-key (kbd "C-c C-s") 'elpy-rgrep-symbol)
+(define-key elpy-mode-map (kbd "ESC p") 'elpy-nav-move-line-or-region-up)
+(define-key elpy-mode-map (kbd "ESC n") 'elpy-nav-move-line-or-region-down)
+(define-key elpy-mode-map (kbd "ESC b") 'elpy-nav-indent-shift-left)
+(define-key elpy-mode-map (kbd "ESC f") 'elpy-nav-indent-shift-right)
+
+;; Mode hooks
+(add-hook 'csv-mode-hook
+          (lambda ()
+            (csv-align-mode 1)
+            (csv-header-line)
+            (remove-hook 'before-save-hook 'whitespace-cleanup)))
+;; (add-hook 'elpy-mode-hook
+;;           (lambda () (add-hook 'before-save-hook 'elpy-format-code nil t)))
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq-local linum-format "%d ")
+            (linum-mode 1)))
 
 ;; Play nicely with window managers, X11, etc.
 (when window-system
@@ -88,8 +105,7 @@
   (add-to-list 'default-frame-alist '(height . 50))
   (add-to-list 'default-frame-alist '(width . 100))
   (set-scroll-bar-mode 'right)
-  (tool-bar-mode -1)
-  (add-hook 'prog-mode-hook 'linum-mode))
+  (tool-bar-mode -1))
 
 ;; Play nicely with terminal
 (unless window-system
