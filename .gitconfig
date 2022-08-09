@@ -1,5 +1,7 @@
 [alias]
   prune-orphaned-branches = !git remote prune origin && git branch -vv | egrep '\\[origin/\\S+: gone]' | awk '{print $1}' | xargs -r git branch -D
+[core]
+  editor = emacs
 [filter "lfs"]
   required = true
   clean = git-lfs clean -- %f
