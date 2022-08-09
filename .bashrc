@@ -31,6 +31,11 @@ if ps $$ | fgrep -q bash; then
       PS1="\n\t \w\n\$ "
     fi
   fi
+
+  # For Emacs term-mode
+  if [[ "$INSIDE_EMACS" && -f ~/.bash_profile ]]; then
+    . ~/.bash_profile
+  fi
 fi
 
 umask 077
