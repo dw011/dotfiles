@@ -2,7 +2,8 @@
 
 if ps $$ | fgrep -q bash; then
   # Include user options, aliases and functions in login shells
-  if [ -f ~/.bashrc ]; then
+  shopt -q login_shell
+  if [[ $? -eq 0 && -f ~/.bashrc ]]; then
     . ~/.bashrc
   fi
 fi

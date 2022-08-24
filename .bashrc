@@ -6,22 +6,28 @@ if ps $$ | fgrep -q bash; then
     . /etc/bashrc
   fi
 
-  # Bash completion; e.g. for Makefile targets
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /opt/local/share/bash-completion/bash_completion ]; then
-    . /opt/local/share/bash-completion/bash_completion
-  fi
-
-  # Bash options
-  if [[ "$BASH_VERSION" == 4.* ]]; then
-    shopt -s dirspell
-  fi
-  shopt -s extglob
-  shopt -s nocaseglob
-
-  # Bash prompt
   if [[ "$PS1" ]]; then
+    # Bash completion; e.g. for Makefile targets
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+      . /usr/share/bash-completion/bash_completion
+    elif [ -f /opt/local/share/bash-completion/bash_completion ]; then
+      . /opt/local/share/bash-completion/bash_completion
+    fi
+
+    # For Emacs term-mode, especially when launched from a
+    # daemon managed by systemd outside a login session.
+    if [[ "$INSIDE_EMACS" && -f ~/.bash_profile ]]; then
+      . ~/.bash_profile
+    fi
+
+    # Bash options
+    if [[ "$BASH_VERSION" == 4.* ]]; then
+      shopt -s dirspell
+    fi
+    shopt -s extglob
+    shopt -s nocaseglob
+
+    # Bash prompt
     if [[ "$TERM" == xterm* ]]; then
       PROMPT_COMMAND='printf "\033]0;%s@%s\033\\" "${USER}" "${HOSTNAME/.*/}"'
     fi
@@ -30,11 +36,6 @@ if ps $$ | fgrep -q bash; then
     else
       PS1="\n\t \w\n\$ "
     fi
-  fi
-
-  # For Emacs term-mode
-  if [[ "$INSIDE_EMACS" && -f ~/.bash_profile ]]; then
-    . ~/.bash_profile
   fi
 fi
 
