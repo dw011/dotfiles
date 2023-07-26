@@ -10,5 +10,4 @@ set completion-ignore-case on
 
 # To setup on macOS, change the default keyboard shortcuts for Mission
 # Control s.t. they do not conflict with ctrl-left-arrow, etc. In
-# iTerm under Preferences -> Profiles -> Keys, set left and right
-# Option keys to "Esc+".
+# iTerm, import iterm2_profile.json under Preferences -> Profiles.
