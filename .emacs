@@ -12,7 +12,6 @@
 (setq default-major-mode 'text-mode)
 (setq frame-title-format (concat  "%b - " (system-name)))
 (setq inhibit-startup-screen t)
-(setq ispell-program-name "aspell")
 (setq make-backup-files nil)
 (setq mouse-drag-copy-region t)
 (setq next-line-add-newlines nil)
