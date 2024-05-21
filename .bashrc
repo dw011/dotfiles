@@ -49,8 +49,9 @@ if [ -d /Applications/Emacs.app/ ]; then
   alias ebrowse='/Applications/Emacs.app/Contents/MacOS/bin/ebrowse'
 fi
 
-alias pip='python -m pip'
-alias pydoc='python -m pydoc'
+alias pip='python3 -m pip'
+alias pydoc='python3 -m pydoc'
+alias python=python3
 
 alias ls='ls -h'
 alias rm='rm -i'
