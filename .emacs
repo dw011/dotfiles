@@ -40,11 +40,11 @@
 ;; Packages and MELPA
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
-(dolist (package `(csv-mode elpy projectile))
+(dolist (package `(csv-mode elpy markdown-mode projectile))
   (unless (package-installed-p package)
     (package-install package)))
 
@@ -95,10 +95,8 @@
 (define-key elpy-mode-map (kbd "ESC <down>") 'forward-paragraph)
 (define-key elpy-mode-map (kbd "ESC left>") 'backward-word)
 (define-key elpy-mode-map (kbd "ESC <right>") 'forward-word)
-(define-key elpy-mode-map (kbd "ESC p") 'elpy-nav-move-line-or-region-up)
-(define-key elpy-mode-map (kbd "ESC n") 'elpy-nav-move-line-or-region-down)
-(define-key elpy-mode-map (kbd "ESC b") 'elpy-nav-indent-shift-left)
-(define-key elpy-mode-map (kbd "ESC f") 'elpy-nav-indent-shift-right)
+(define-key elpy-mode-map (kbd "<backtab>") 'elpy-nav-indent-shift-left)
+(define-key elpy-mode-map (kbd "<tab>") 'elpy-nav-indent-shift-right)
 
 ;; Mode hooks
 (add-hook 'csv-mode-hook
@@ -112,6 +110,8 @@
           (lambda ()
             (setq-local linum-format "%d ")
             (linum-mode 1)))
+(add-hook 'text-mode-hook
+          (lambda () (visual-line-mode 1)))
 
 ;; Play nicely with window managers, X11, etc.
 (when window-system
@@ -127,7 +127,7 @@
 (unless window-system
   (xterm-mouse-mode 1))
 
-;; Play nicely with macOS and MacPorts
+;; Play nicely with macOS
 ;; Note macOS doesn't source shell startup scripts on login
 (when (string-equal system-type "darwin")
   (setq exec-path (append '("/opt/local/bin") exec-path))
