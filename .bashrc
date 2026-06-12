@@ -43,8 +43,8 @@ umask 077
 ulimit -c 0
 
 if [ -d /Applications/Emacs.app/ ]; then
-  alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-  alias emacsclient='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
+  alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
+  alias emacsclient='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nw'
   alias etags='/Applications/Emacs.app/Contents/MacOS/bin/etags'
   alias ebrowse='/Applications/Emacs.app/Contents/MacOS/bin/ebrowse'
 fi
@@ -72,7 +72,7 @@ if [[ -t 1 && "$(tput colors)" -gt 0 ]]; then
 fi
 
 function cd {
-  # cd with optional -l to follow resolve symlinks
+  # cd with optional -l to follow symlinks
   if [[ "$1" == '-l' ]]; then
     x="${2%/}"
     [[ -L "$x" ]] && builtin cd $(readlink "$x")
